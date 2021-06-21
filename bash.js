@@ -13,5 +13,4 @@ process.stdin.on("data", (data) => {
   if (cmd === "ls") {
     ls();
   }
-  process.stdout.write("\nprompt > ");
 });
