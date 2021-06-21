@@ -4,13 +4,8 @@ const cat = require("./cat");
 const curl = require("./request");
 
 const done = (output) => {
-  if (output.length === 1) process.stdout.write(output);
-  else {
-    // "spreads" all elements of the string, into an array so we can call forEach
-    const fileContents = [...output];
-    fileContents.forEach((content) => process.stdout.write(content));
-  }
-  process.stdout.write("\nprompt > "); // Cat implementation
+  process.stdout.write(output); // Step 2: Output the result of the command
+  process.stdout.write("\nprompt > "); // Step 3: Show the prompt 
 };
 
 // Output a prompt
@@ -20,14 +15,14 @@ process.stdout.write("prompt > ");
 process.stdin.on("data", (data) => {
   const cmd = data.toString().trim();
   if (cmd === "pwd") {
-    pwd(done); // test
+    pwd(done);
   }
   if (cmd === "ls") {
     ls(done);
   }
   if (cmd.slice(0, 3) === "cat") {
-    const fileNameArray = cmd.slice(4).split(" ");
-    cat(fileNameArray, done);
+    const fileName = cmd.slice(4);
+    cat(fileName, done);
   }
   if (cmd.slice(0, 4) === "curl") {
     curl(cmd.slice(5));
